@@ -14,19 +14,19 @@ MainWindow::MainWindow(QWidget *parent)
     tm.DatabaseInit();
 
     DisplayDatabase();
-
 }
 
 void MainWindow::DisplayDatabase()
 {
-    QSqlQueryModel* model = new QSqlQueryModel();
+    QScopedPointer<QSqlQueryModel> model(new QSqlQueryModel());
     QSqlQuery query;
 
     query.exec("SELECT * FROM auta");
+
     model->setQuery(query);
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
 
-    ui->tableView->setModel(model);
+    ui->tableView->setModel(model.take());
     ui->tableView->resizeColumnsToContents();
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->show();
@@ -44,10 +44,12 @@ void MainWindow::on_pbDodaj_clicked()
 
 void MainWindow::on_pbEdytuj_clicked(){
     QModelIndexList selIndex = ui->tableView->selectionModel()->selectedIndexes();
+    QMessageBox msgBox;
     TableManager tm;
 
     if (selIndex.isEmpty()) {
-        qDebug() << "Wybierz wiersz do usuniecia";
+        msgBox.setText("Wybierz wiersz do edycji");
+        msgBox.exec();
     } else {
         int toUpdate = ui->tableView->model()->data(ui->tableView->model()->index(selIndex.begin()->row(),0)).toInt();
         EdytujWBazie::toEditRow = toUpdate;
@@ -63,13 +65,13 @@ void MainWindow::on_pbEdytuj_clicked(){
 void MainWindow::on_pbUsun_clicked(){
     QModelIndexList selIndex = ui->tableView->selectionModel()->selectedIndexes();
     TableManager tm;
+    QMessageBox msgBox;
 
     if (selIndex.isEmpty()) {
-        qDebug() << "Wybierz wiersz do usuniecia";
+        msgBox.setText("Wybierz wiersz do usuniecia");
+        msgBox.exec();
     } else {
         int toDelete = ui->tableView->model()->data(ui->tableView->model()->index(selIndex.begin()->row(),0)).toInt();
-        qDebug() << selIndex.begin()->row();
-        qDebug() << toDelete;
         tm.DeleteEntry(toDelete);
         DisplayDatabase();
     }

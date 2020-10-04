@@ -1,6 +1,5 @@
 #include "pasekpostepu.h"
 #include "ui_pasekpostepu.h"
-#include "mythread.h"
 
 PasekPostepu::PasekPostepu(QWidget *parent) :
     QDialog(parent),
@@ -13,6 +12,7 @@ PasekPostepu::PasekPostepu(QWidget *parent) :
     connect(thr, SIGNAL(progress(int)), this, SLOT(updateProgress(int)), Qt::QueuedConnection);
     connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
     connect(ui->pbPrzerwij, SIGNAL(clicked()), thr, SLOT(quit()));
+    connect(this, SIGNAL(rejected()), thr, SLOT(quit()));
 
     thr->start();
 }
@@ -29,4 +29,8 @@ void PasekPostepu::updateProgress(int prog)
 void PasekPostepu::on_pbPrzerwij_clicked()
 {
 
+}
+void PasekPostepu::closeEvent(QCloseEvent *e) {
+    this->reject();
+    e->ignore();
 }

@@ -9,12 +9,10 @@ void TableManager::DatabaseConnect()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
-//    db.setDatabaseName("C:/Users/Maciek/Documents/QT/Test/mydb.db");
     db.setDatabaseName(QDir::currentPath()+"mydb.db");
-    qDebug() << QDir::currentPath();
 
     if(!db.open()){
-        qWarning() << "MainWindow::DatabaseConnect - ERROR: " << db.lastError().text();
+        qWarning() << "TableManager::DatabaseConnect - ERROR: " << db.lastError().text();
     } else {
         qDebug() << "Baza danych otwarta";
     }
@@ -24,20 +22,7 @@ void TableManager::DatabaseInit()
     QSqlQuery query("CREATE TABLE auta (id INTEGER PRIMARY KEY, marka TEXT, model TEXT, nrRej TEXT, vin TEXT)");
 
     if(!query.isActive())
-        qWarning() << "MainWindow::DatabaseInit - ERROR: " << query.lastError().text();
-}
-
-void TableManager::DatabasePopulate()
-{
-    QSqlQuery query;
-
-    qDebug() << "DatabasePopulate()";
-
-    if(!query.exec("INSERT INTO people(marka) VALUES('Eddie Guerrero')"))
-        qWarning() << "MainWindow::DatabasePopulate - ERROR: " << query.lastError().text();
-    if(!query.exec("INSERT INTO people(marka) VALUES('Gordon Ramsay')"))
-        qWarning() << "MainWindow::DatabasePopulate - ERROR: " << query.lastError().text();
-
+        qWarning() << "TableManager::DatabaseInit - ERROR: " << query.lastError().text();
 }
 
 void TableManager::DeleteEntry(int rowNo)
@@ -45,7 +30,7 @@ void TableManager::DeleteEntry(int rowNo)
     QSqlQuery query;
 
     if(!query.exec("DELETE FROM auta WHERE id = '" + QString::number(rowNo) + "'"))
-        qWarning() << "MainWindow::DeleteEntry - ERROR: " << query.lastError().text();
+        qWarning() << "TableManager::DeleteEntry - ERROR: " << query.lastError().text();
 
 }
 

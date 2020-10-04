@@ -1,5 +1,4 @@
-#ifndef MYTHREAD_H
-#define MYTHREAD_H
+#pragma once
 
 #include <QDialog>
 
@@ -20,9 +19,8 @@ private slots:
     void step();
 public:
     MyThread(QObject* parent = 0);
+    ~MyThread();
 private:
     void run();
 };
-
-#endif // MYTHREAD_H
 

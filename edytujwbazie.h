@@ -1,5 +1,4 @@
-#ifndef EDYTUJWBAZIE_H
-#define EDYTUJWBAZIE_H
+#pragma once
 
 #include "mainwindow.h"
 #include "tablemanager.h"
@@ -33,5 +32,3 @@ private:
 
     void setLabels();
 };
-
-#endif // EDYTUJWBAZIE_H

@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include "dodajdobazy.h"
 #include "edytujwbazie.h"
@@ -10,6 +9,7 @@
 #include <QMainWindow>
 
 #include <QDebug>
+#include <QMessageBox>
 
 #include <QSqlDatabase>
 #include <QSqlTableModel>
@@ -45,4 +45,3 @@ private slots:
 private:
     Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H

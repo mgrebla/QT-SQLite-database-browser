@@ -1,5 +1,4 @@
-#ifndef DODAJDOBAZY_H
-#define DODAJDOBAZY_H
+#pragma once
 
 #include "mainwindow.h"
 #include "tablemanager.h"
@@ -32,5 +31,3 @@ private:
     Ui::dodajdobazy *ui;
 
 };
-
-#endif // DODAJDOBAZY_H

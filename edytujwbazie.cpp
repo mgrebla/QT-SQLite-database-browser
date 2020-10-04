@@ -40,12 +40,6 @@ void EdytujWBazie::setLabels(){
     ui->teModel->setText(tm.FindEntry(toEditRow, "model"));
     ui->teNrRej->setText(tm.FindEntry(toEditRow, "nrRej"));
     ui->teVin->setText(tm.FindEntry(toEditRow, "vin"));
-
-    qDebug() << toEditRow;
-    qDebug() << tm.FindEntry(toEditRow, "marka");
-    qDebug() << tm.FindEntry(toEditRow, "model");
-    qDebug() << tm.FindEntry(toEditRow, "nrRej");
-    qDebug() << tm.FindEntry(toEditRow, "vin");
 }
 
 EdytujWBazie::~EdytujWBazie()
